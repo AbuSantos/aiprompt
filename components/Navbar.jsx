@@ -69,13 +69,13 @@ const Navbar = () => {
 
       {/* mobile nav */}
       <div className="flex sm:hidden">
-        {session ? (
+        {session?.user ? (
           <div className="flex">
-            <Image
-              src="/assets/images/logo.svg"
+            <img
+              src={session?.user.image}
               width={37}
               height={37}
-              className="object-contain"
+              className="object-contain rounded-full"
               alt="aiPrompt logo"
               onClick={() => setMobileToggle((prevState) => !prevState)}
             />
