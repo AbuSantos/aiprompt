@@ -16,19 +16,24 @@ const handler = NextAuth({
 
   callbacks: {
     async session({ session }) {
+      //get updated constantly on the user
       const sessionUser = await User.findOne({
         email: session.user?.email,
       });
 
-      session.user?.id = sessionUser._id
+      session.user.id = sessionUser._id.toString();
+
+      return session;
     },
     async signIn({ profile }) {
       try {
+        //connect to the db and we check if the user is there.
         await connectDB();
         const userExist = await User.findOne({
           email: profile?.email,
         });
 
+        //if not, we create a new one
         if (!userExist) {
           await User.create({
             email: profile.email,

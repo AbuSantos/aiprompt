@@ -2,22 +2,23 @@ import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
   email: {
-    type: string,
+    type: String,
     unique: [true, "Email already exists!"],
     required: [true, "Email is required!"],
   },
   username: {
-    type: string,
+    type: String,
     required: [true, "Username is required!"],
     match: [
-      /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+      /^[a-zA-Z0-9\s]{8,20}$/,
+      console.log("Username to be validated:", username),
       "Username invalid, it should contain 8-20 alphanumeric letters and be unique!",
     ],
   },
-  image: { type: string },
+  image: { type: String },
 });
 
-//check if the user model is already there, and if not, we create it.
+// Check if the user model is already there, and if not, we create it.
 const User = models.User || model("User", UserSchema);
 
 export default User;

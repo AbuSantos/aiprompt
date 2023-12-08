@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 const Navbar = () => {
-  const isUserLoggedIn = true
+  const { data: session } = useSession()
   const [providers, setProviders] = useState(null)
   const [mobileToggle, setMobileToggle] = useState(false)
   useEffect(() => {
@@ -30,7 +30,7 @@ const Navbar = () => {
 
       {/* desktop nav */}
       <div className="hidden sm:flex">
-        {isUserLoggedIn ? (
+        {session ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -56,9 +56,11 @@ const Navbar = () => {
                 <button
                   type="button"
                   key={provider.id}
-                  onClick={() => signIn(provider.id)}
+                  onClick={async () => await signIn(provider.id)}
+                  className="black_btn"
                 >
                   Sign in with {provider.name}
+                  {/* <Image src={provider.image} /> */}
                 </button>
               ))}
           </>
@@ -67,7 +69,7 @@ const Navbar = () => {
 
       {/* mobile nav */}
       <div className="flex sm:hidden">
-        {isUserLoggedIn ? (
+        {session ? (
           <div className="flex">
             <Image
               src="/assets/images/logo.svg"
