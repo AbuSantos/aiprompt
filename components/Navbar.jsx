@@ -84,8 +84,26 @@ const Navbar = () => {
                   className="dropdown_link"
                   onClick={() => setMobileToggle(false)}
                 >
-                  Profile
+                  My Profile
                 </Link>
+                <Link
+                  href="/create-prompt"
+                  className="dropdown_link"
+                  onClick={() => setMobileToggle(false)}
+                >
+                  Create Prompt
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileToggle(false)
+                    signOut()
+                  }}
+                  className="mt-5 w-full black_btn"
+                >
+                  {' '}
+                  Sign Out
+                </button>
               </div>
             )}
           </div>
