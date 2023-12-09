@@ -39,7 +39,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             value={post.tag}
             onChange={(e) => setPost({ ...post, tag: e.target.value })}
             placeholder="add a #tag"
-            className="form_input"
+            className="form_input outline-none"
             required
           />
         </label>

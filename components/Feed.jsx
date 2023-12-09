@@ -4,7 +4,9 @@ import PromptCard from './PromptCard'
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout ">
-      {data.map((prompt) => console.log(prompt))}
+      {data.map((prompt) => (
+        <PromptCard prompt={prompt} />
+      ))}
     </div>
   )
 }
@@ -12,14 +14,16 @@ const Feed = () => {
   const [searchtext, setSearchText] = useState('')
   const [prompts, setPrompts] = useState([])
   const handleTextChange = (e) => {}
+
   useEffect(() => {
     const fecthPrompts = async () => {
-      const res = await fetch('api/prompts/')
+      const res = await fetch('api/prompt')
       const data = await res.json()
       setPrompts(data)
     }
     fecthPrompts()
   }, [])
+
   return (
     <section className="feed">
       <form action="" className="relative w-full flex-center">
@@ -29,7 +33,7 @@ const Feed = () => {
           value={searchtext}
           onChange={handleTextChange}
           required
-          className="search_input peer"
+          className="search_input peer outline-none"
         />
       </form>
 
