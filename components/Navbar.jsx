@@ -40,11 +40,11 @@ const Navbar = () => {
             </button>
 
             <Link href="/profile">
-              <Image
-                src="/assets/images/logo.svg"
+              <img
+                src={session?.user.image}
                 width={37}
                 height={37}
-                className="object-contain"
+                className="object-contain rounded-full"
                 alt="aiPrompt logo"
               />
             </Link>
