@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className="hidden sm:flex">
         {session ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn">
+            <Link href="/createPrompt" className="black_btn">
               Create Post
             </Link>
             <button type="button" onClick={signOut} className="outline_btn">
@@ -89,7 +89,7 @@ const Navbar = () => {
                   My Profile
                 </Link>
                 <Link
-                  href="/create-prompt"
+                  href="/createPrompt"
                   className="dropdown_link"
                   onClick={() => setMobileToggle(false)}
                 >
