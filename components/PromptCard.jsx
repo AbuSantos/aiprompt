@@ -8,6 +8,7 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
   const [copied, setCopied] = useState('')
   const { data: session } = useSession()
   const pathName = usePathname()
+  const router = useRouter()
 
   function capitalizeFirstLetter(string) {
     return string
@@ -30,7 +31,10 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
   return (
     <div className="prompt_card">
       <div className="flex justify-between gap-5 items-center">
-        <div className="flex flex-1 cursor-pointer items-center justify-start">
+        <div
+          className="flex flex-1 cursor-pointer items-center justify-start"
+          onClick={() => router.push(`/user/${prompt.creator._id}/`)}
+        >
           <img
             src={prompt.creator.image}
             alt="creator image"
