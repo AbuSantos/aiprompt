@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 
 const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
   const [copied, setCopied] = useState('')
+  const { data: session } = useSession()
+  const pathName = usePathname()
 
   function capitalizeFirstLetter(string) {
     return string
@@ -65,6 +67,22 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
       >
         #{prompt.tag}
       </p>
+      {session?.user.id === prompt.creator._id && pathName === '/profile' && (
+        <div className="mt-4 flex-center gap-4 border-t border-gray-100 p-3">
+          <p
+            className="cursor-pointer green_gradient font-inter"
+            onClick={handleEdit}
+          >
+            edit
+          </p>
+          <p
+            className="cursor-pointer orange_gradient font-inter"
+            onClick={handleDelete}
+          >
+            delete
+          </p>
+        </div>
+      )}
     </div>
   )
 }
