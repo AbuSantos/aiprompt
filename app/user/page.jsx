@@ -5,13 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const UserProfile = () => {
-    const searchParams = useSearchParams()
-  const promptId = searchParams.get('id')
-  const router = useRouter()
-  const { data: session } = useSession()
+  const searchParams = useSearchParams()
+  const userId = searchParams.get('id')
   const [prompts, setPrompts] = useState([])
-  const { userId } = router.query
-
+  console.log('router.query:', userId)
   useEffect(() => {
     const fetchPrompts = async () => {
       const res = await fetch(`api/users/${userId}/prompt`)
@@ -20,11 +17,16 @@ const UserProfile = () => {
       setPrompts(data)
     }
     //we're fetching post only when we have the user id
-    if (session?.user.id) fetchPrompts()
-  }, [userId])
-  console.log('1 API Response:', prompts)
+    if (userId) fetchPrompts()
+  }, [])
 
-  return <div>[userId]</div>
+  return (
+    <div>
+      <div>
+        <Profile name="My" desc="View all your prompts" data={prompts} />
+      </div>
+    </div>
+  )
 }
 
 export default UserProfile

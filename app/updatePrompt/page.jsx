@@ -12,7 +12,7 @@ const UpdatePrompt = () => {
   })
   const searchParams = useSearchParams()
   const promptId = searchParams.get('id')
-  const router = useRouter()
+//   const router = useRouter()
 
   useEffect(() => {
     const getPromptDetails = async () => {
