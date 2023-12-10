@@ -36,7 +36,7 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
           onClick={() => router.push(`/user?id=${prompt.creator._id}`)}
         >
           <img
-            src={prompt.creator.image}
+            src={prompt.creator?.image}
             alt="creator image"
             height={40}
             width={40}

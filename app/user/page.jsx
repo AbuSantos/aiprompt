@@ -8,22 +8,32 @@ const UserProfile = () => {
   const searchParams = useSearchParams()
   const userId = searchParams.get('id')
   const [prompts, setPrompts] = useState([])
-  console.log('router.query:', userId)
   useEffect(() => {
     const fetchPrompts = async () => {
-      const res = await fetch(`api/users/${userId}/prompt`)
-      const data = await res.json()
-
-      setPrompts(data)
+      if (userId) {
+        const res = await fetch(`api/users/${userId}/prompt`)
+        const data = await res.json()
+        setPrompts(data)
+      }
     }
     //we're fetching post only when we have the user id
-    if (userId) fetchPrompts()
+    fetchPrompts()
   }, [])
-
+  // console.log(prompts[0].creator?.username)
+  function capitalizeFirstLetter(string) {
+    return string
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  }
   return (
     <div>
       <div>
-        <Profile name="My" desc="View all your prompts" data={prompts} />
+        <Profile
+          name={`${prompts[0]?.creator?.username}'s`}
+          desc={`View all ${prompts[0]?.creator?.username}'s prompts`}
+          data={prompts}
+        />
       </div>
     </div>
   )

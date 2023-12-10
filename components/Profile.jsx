@@ -10,6 +10,7 @@ const Profile = ({ name, desc, handleEdit, handleDelete, data }) => {
       <div className="mt-10  prompt_layout ">
         {data.map((prompt) => (
           <PromptCard
+            name={prompt.creator?.username}
             prompt={prompt}
             key={prompt.id}
             handleEdit={() => handleEdit && handleEdit(prompt)}
