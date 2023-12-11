@@ -42,12 +42,14 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
             width={40}
             className="rounded-full object-contain"
           />
+          
           <div className="flex flex-col">
             <h3 className=" text-gray-800 ml-4 font-bold font-satoshi">
               {capitalizeFirstLetter(prompt.creator.username)}
             </h3>
             <p className="text-sm text-gray-500 ml-4">{prompt.creator.email}</p>
           </div>
+          
         </div>
         <div className="copy_btn" onClick={handleCopy}>
           <img

@@ -36,7 +36,7 @@ const ProfilePage = () => {
     //we're fetching post only when we have the user id
     if (session?.user.id) fetchPrompts()
   }, [])
-  console.log('1 API Response:', prompts)
+  // console.log('1 API Response:', prompts)
 
   return (
     <div>
