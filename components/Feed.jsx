@@ -1,51 +1,64 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { debounce } from 'lodash'
+import { Suspense } from 'react'
 import PromptCard from './PromptCard'
+import FeedSkeleton from './FeedSkeleton'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+const delay = (time) =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(1), time)
+  })
+
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout ">
       {data.map((prompt) => (
-        <PromptCard
-          prompt={prompt}
-          key={prompt.id}
-          handleTagClick={handleTagClick}
-        />
+        <Suspense fallback={<FeedSkeleton />}>
+          <PromptCard
+            prompt={prompt}
+            key={prompt.id}
+            handleTagClick={handleTagClick}
+          />
+        </Suspense>
       ))}
     </div>
   )
 }
+
 const Feed = () => {
   const [searchtext, setSearchText] = useState('')
-  const [filtedPrompts, setFilteredPrompts] = useState([])
+  const [filteredPrompts, setFilteredPrompts] = useState([])
   const [prompts, setPrompts] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const handleTextChange = (e) => {
     const newText = e.target.value
     debounceHandleText(newText)
-    // setSearchText(newText)
-    // const filtered = searchPrompts(prompts, newText)
-    // setFilteredPrompts(filtered)
   }
 
   const debounceHandleText = debounce((newText) => {
     setSearchText(newText)
     const filtered = searchPrompts(prompts, newText)
     setFilteredPrompts(filtered)
-  }, 400)
-  
+  }, 200)
+
   const handleTagClick = (tag) => {
-    const showTags = searchPrompts(prompts, tag)
-    setFilteredPrompts(showTags)
+    debounceHandleText(tag)
   }
+
   useEffect(() => {
-    const fecthPrompts = async () => {
+    const fetchPrompts = async () => {
+      await delay(1000)
       const res = await fetch('api/prompt')
       const data = await res.json()
       setPrompts(data)
       setFilteredPrompts(data)
+      setLoading(false)
     }
-    fecthPrompts()
+    fetchPrompts()
   }, [])
 
   const searchPrompts = (prompts, searchText) => {
@@ -61,7 +74,7 @@ const Feed = () => {
   }
 
   return (
-    <section className="feed">
+    <section className="fexed">
       <form action="" className="relative w-full flex-center">
         <input
           type="text"
@@ -72,8 +85,7 @@ const Feed = () => {
           className="search_input peer outline-none"
         />
       </form>
-
-      <PromptCardList data={filtedPrompts} handleTagClick={handleTagClick} />
+      <PromptCardList data={filteredPrompts} handleTagClick={handleTagClick} />
     </section>
   )
 }

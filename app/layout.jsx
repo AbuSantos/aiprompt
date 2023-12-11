@@ -4,6 +4,7 @@ import '@styles/globals.css'
 
 export const metadata = {
   title: 'aiprompts',
+  manifest: '/manifest.json',
   description: 'Discover and share ai prompts',
 }
 const RootLayout = ({ children }) => {
