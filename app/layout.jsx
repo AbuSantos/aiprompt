@@ -13,7 +13,11 @@ const RootLayout = ({ children }) => {
     <html lang="eng">
       <Head>
         <title>{metadata.title}</title>
-        <link rel="manifest" href="/manifest.json" />
+        <link
+          rel="manifest"
+          href="/manifest.json"
+          crossorigin="use-credentials"
+        />
         <meta name="description" content={metadata.description} />
       </Head>
       <Provider>
