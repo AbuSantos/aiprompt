@@ -1,8 +1,32 @@
 {
   "id": "any_id",
+
   "name": "aiPrompt",
+
   "short_name": "aiPrompt",
   "description": "This is an aiPrompt for the future",
+  "lang": "en",
+  "dir": "auto",
+  "related_applications": [
+    {
+      "platform": "webapp"
+    }
+  ],
+  "prefer_related_applications": true,
+  "categories": ["ai", "productivity", "news"],
+  "share_target": {
+    "action": "/share-target/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "aiPrompt",
+      "text": "This is an aiPrompt for the future"
+    }
+  },
+  "display_override": ["window-controls-overlay"],
+  "edge_side_panel": {
+    "preferred_width": 496
+  },
   "icons": [
     {
       "src": "/ai.svg",
@@ -29,10 +53,10 @@
       "purpose": "any"
     }
   ],
-  "theme_color": "#FFFFFF",
-  "background_color": "#FFFFFF",
   "start_url": "/",
-  "scope": ".",
+  "theme_color": "#4285f4",
+  "background_color": "#dbdad9",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "scope": "/"
 }
