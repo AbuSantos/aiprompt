@@ -13,7 +13,7 @@ const RootLayout = ({ children }) => {
     <html lang="eng">
       <Head>
         <title>{metadata.title}</title>
-        <link rel="manifest" href={metadata.manifest} />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="description" content={metadata.description} />
       </Head>
       <Provider>
