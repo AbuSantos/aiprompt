@@ -1,4 +1,5 @@
 import Navbar from '@components/Navbar'
+import Head from 'next/head'
 import Provider from '@components/Provider'
 import '@styles/globals.css'
 
@@ -10,6 +11,11 @@ export const metadata = {
 const RootLayout = ({ children }) => {
   return (
     <html lang="eng">
+      <Head>
+        <title>{metadata.title}</title>
+        <link rel="manifest" href={metadata.manifest} />
+        <meta name="description" content={metadata.description} />
+      </Head>
       <Provider>
         <body>
           <div className="main">
