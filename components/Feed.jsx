@@ -85,6 +85,7 @@ const Feed = () => {
           className="search_input peer outline-none"
         />
       </form>
+      <img src="/robot.svg" width={144} alt="" />
       <PromptCardList data={filteredPrompts} handleTagClick={handleTagClick} />
     </section>
   )
