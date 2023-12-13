@@ -20,6 +20,17 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
 
+  function truncateStringWithDotCom(str, maxLength) {
+    // Check if the string length is greater than the maxLength
+    if (str.length > maxLength) {
+      // Truncate the string and add ellipsis
+      return str.substring(0, maxLength - 4) + '...com'
+    } else {
+      // If the string is already within the maxLength, return it as is
+      return str
+    }
+  }
+
   const handleCopy = () => {
     setCopied(prompt.prompt)
     // write the contents ton the copy
@@ -42,14 +53,15 @@ const PromptCard = ({ prompt, handleDelete, handleEdit, handleTagClick }) => {
             width={40}
             className="rounded-full object-contain"
           />
-          
+
           <div className="flex flex-col">
             <h3 className=" text-gray-800 ml-4 font-bold font-satoshi">
               {capitalizeFirstLetter(prompt.creator.username)}
             </h3>
-            <p className="text-sm text-gray-500 ml-4">{prompt.creator.email}</p>
+            <p className="text-sm text-gray-500 ml-4 truncate">
+              {truncateStringWithDotCom(prompt.creator.email, 5)}
+            </p>
           </div>
-          
         </div>
         <div className="copy_btn" onClick={handleCopy}>
           <img
